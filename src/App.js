@@ -1,28 +1,66 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+// import { render } from 'react-dom';
+// import { space, width, fontSize, color } from 'styled-system';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './themes/theme';
+import { connect } from 'react-redux';
+import Box from './blocks/box'
+import Input from './blocks/Input'
 
-class App extends Component {
-  render() {
+import { deleteTodo, addTodo } from './actions/todoActions'
+
+
+class App extends React.Component {
+  handleDelete = (id) => {
+    this.props.deletePost(id)
+  }
+  handleAdd = (e) => {
+    if(e.keyCode === 13){
+      var val = e.target.value;
+      var newTodo = {
+        id: Math.random(),
+        text: val
+      }
+      this.props.addPost(newTodo);
+      e.target.value = '';
+    }
+  }
+  
+  render(){
+    console.log(this.props);
+    const { todos } = this.props;
+    console.log(todos)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    <ThemeProvider theme={theme}>
+      <Box width='4' mx='auto'>
+        <Input outline='3' p={2} height='1' bg='near-white' width='100%' mb={2} onKeyDown={(e) => this.handleAdd(e)} type="text"/>
+      {todos.map((todo)=>
+        <Box p={2} bg='light-silver' height='1' color='black' w='100%' mb={2} key={todo.id}>
+          <Box>{todo.text}</Box>
+          <button onClick={() => this.handleDelete(todo.id)}>delete</button>
+        </Box>
+        
+      )}
+      </Box>
+    </ThemeProvider>
+    )
+  }
+  
+};
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePost: (id) => {dispatch(deleteTodo(id))},
+    addPost: (obj) => {dispatch(addTodo(obj))}
+  }
+}
+
+//render(<App />, document.getElementById('root'));
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
