@@ -6,8 +6,13 @@ import { theme } from './themes/theme';
 import { connect } from 'react-redux';
 import Box from './blocks/box'
 import Input from './blocks/Input'
+import './App.css'
 
-import { deleteTodo, addTodo } from './actions/todoActions'
+import { deleteTodo, addTodo } from './actions'
+
+import Icon from './elements/icon'
+import IconGenerator from './utils/iconGenerator'
+
 
 
 class App extends React.Component {
@@ -36,11 +41,18 @@ class App extends React.Component {
         <Input outline='3' p={2} height='1' bg='near-white' width='100%' mb={2} onKeyDown={(e) => this.handleAdd(e)} type="text"/>
       {todos.map((todo)=>
         <Box p={2} bg='light-silver' height='1' color='black' w='100%' mb={2} key={todo.id}>
-          <Box>{todo.text}</Box>
+          <span>{todo.text}</span>
           <button onClick={() => this.handleDelete(todo.id)}>delete</button>
         </Box>
         
       )}
+      <Icon/>
+      <Icon sportId = {1}/>
+      <Icon sportId = {2}/>
+      <Icon sportId = {3}/>
+
+      <IconGenerator/>
+
       </Box>
     </ThemeProvider>
     )

@@ -9,6 +9,7 @@ const Box = styled.div`
   ${display}
 `
 
-Box.displayName = 'Box'
+Box.displayName = 'Box';
 
+export { Box }
 export default Box
