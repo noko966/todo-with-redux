@@ -51,8 +51,7 @@ class App extends React.Component {
       <Icon sportId = {2}/>
       <Icon sportId = {3}/>
 
-      <IconGenerator/>
-
+        <IconGenerator/>
       </Box>
     </ThemeProvider>
     )

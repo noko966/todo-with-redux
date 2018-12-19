@@ -9,6 +9,12 @@ export default class Icon extends Component {
         this.sportId = this.props.sportId;
     }
 
+    /**
+     * generate icon based on sport id
+     * @param  {Number} - sId
+     * @return {String} 
+     */
+
     generateTextFromSportId = (sId) => {
         var htmlCode = 32 + sId
         return String.fromCharCode(htmlCode) ;
@@ -31,6 +37,6 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-    sportId: 0
+    sportId: 1
 };
 
