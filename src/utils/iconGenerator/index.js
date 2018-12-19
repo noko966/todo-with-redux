@@ -7,8 +7,7 @@ export default class index extends Component {
         super(props)
         this.state = {
             icons: [1,2,3]
-        }
-        
+        }  
     }
 
     handleKeydown = (e) => {
@@ -20,10 +19,7 @@ export default class index extends Component {
             }));
             console.log(this.state.icons)
         }
-        
-
     } 
-
 
   render() {
     return (
